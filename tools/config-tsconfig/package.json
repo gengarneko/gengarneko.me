@@ -1,10 +1,12 @@
 {
-  "name": "tsconfig",
+  "name": "@blog/tsconfig",
   "version": "0.0.0",
   "private": true,
   "main": "index.js",
+  "license": "MIT",
   "files": [
     "base.json",
+    "vite.json",
     "nextjs.json",
     "react-library.json"
   ]
