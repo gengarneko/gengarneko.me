@@ -1,8 +1,13 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
+import withTwindApp from '@twind/next/app';
+import twindConfig from '../twind.config';
+import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+/**
+ * https://nextjs.org/docs/advanced-features/custom-app
+ */
+function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export default withTwindApp(twindConfig, App);
