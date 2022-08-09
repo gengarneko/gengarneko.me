@@ -1,0 +1,48 @@
+{
+  "name": "@gengarneko/notion-to-markdown",
+  "version": "0.0.0",
+  "description": "Convert notion pages, block and list of blocks to markdown (supports nesting).",
+  "keywords": [
+    "notion",
+    "markdown",
+    "md",
+    "notion",
+    "notion-api",
+    "notion-to-md",
+    "notion2md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build:fast": "tsup",
+    "build": "pnpm run build:fast -- --dts-resolve",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "coverage": "vitest run --coverage",
+    "prepublishOnly": "pnpm run build"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@gengarneko/prettier-config": "^0.1.6",
+    "@notionhq/client": "^2.1.1",
+    "@vitest/ui": "^0.20.3",
+    "c8": "^7.12.0",
+    "prettier": "2.5.1",
+    "tsup": "6.0.1",
+    "typescript": "4.5.4",
+    "vitest": "0.12.6"
+  },
+  "prettier": "@gengarneko/prettier-config"
+}
