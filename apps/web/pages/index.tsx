@@ -1,8 +1,50 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import { tw } from 'twind';
+import pMap from 'p-map';
+import axios from 'axios';
+import { Client } from '@notionhq/client';
+import { useEffect } from 'react';
 
-const Home: NextPage = () => {
+// * ---------------------------------------------------------------------------
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const client = new Client({ auth: process.env.NOTION_ACCESS_TOKEN });
+  const id = process.env.NOTION_BLOG_DATABASE_ID;
+  const response = await client.databases.query({ database_id: id });
+
+  // * ---------------------------
+
+  const pageIds = response.results.map((page) => page.id);
+  const aa = await pMap(pageIds, (id) => client.pages.properties.retrieve({ page_id: id, property_id: 'title' }));
+
+  const pageTitleFetcher = (pageId: string) => {
+    return (
+      client.pages.properties
+        .retrieve({ page_id: pageId, property_id: 'title' })
+        // @ts-ignore
+        .then((res) => res!.results?.[0].title.plain_text)
+    );
+  };
+
+  const titles = await pMap(pageIds, pageTitleFetcher);
+
+  // * ---------------------------
+
+  return { props: { posts: titles, aa, response } };
+};
+
+// * ---------------------------------------------------------------------------
+
+const Home: NextPage = ({ posts, response, aa }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  useEffect(() => {
+    console.log(response, 11111111);
+  }, [response]);
+
+  useEffect(() => {
+    console.log(aa, 22222222);
+  }, [aa]);
+
   return (
     <div>
       <Head>
@@ -12,8 +54,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={tw`h-screen bg-gainsboro flex items-center justify-center`}>
+      <main className={tw`h-screen bg-gainsboro flex flex-col items-center justify-center`}>
         <h1 className={tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}>This is Twind!</h1>
+        <div className={tw`mt-20`}>
+          {posts.map((post, index) => (
+            <div key={index}>post title: {post}</div>
+          ))}
+        </div>
       </main>
 
       <footer>footer</footer>
