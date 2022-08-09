@@ -82,10 +82,9 @@ importers:
       p-all: 4.0.0
       typescript: 4.7.4
 
-  packages/notion-to-md:
+  packages/markdown-table:
     specifiers:
       '@gengarneko/prettier-config': ^0.1.6
-      '@notionhq/client': ^2.1.1
       '@vitest/ui': ^0.20.3
       c8: ^7.12.0
       prettier: 2.5.1
@@ -94,9 +93,32 @@ importers:
       vitest: 0.12.6
     devDependencies:
       '@gengarneko/prettier-config': 0.1.6
+      '@vitest/ui': 0.20.3
+      c8: 7.12.0
+      prettier: 2.5.1
+      tsup: 6.0.1_typescript@4.5.4
+      typescript: 4.5.4
+      vitest: 0.12.6_a75h7wshsl437ycz6mdvk7ygqe
+
+  packages/notion-to-md:
+    specifiers:
+      '@gengarneko/markdown-table': workspace:*
+      '@gengarneko/prettier-config': ^0.1.6
+      '@notionhq/client': ^2.1.1
+      '@vitest/ui': ^0.20.3
+      c8: ^7.12.0
+      markdown-table: ^3.0.2
+      prettier: 2.5.1
+      tsup: 6.0.1
+      typescript: 4.5.4
+      vitest: 0.12.6
+    devDependencies:
+      '@gengarneko/markdown-table': link:../markdown-table
+      '@gengarneko/prettier-config': 0.1.6
       '@notionhq/client': 2.1.1
       '@vitest/ui': 0.20.3
       c8: 7.12.0
+      markdown-table: 3.0.2
       prettier: 2.5.1
       tsup: 6.0.1_typescript@4.5.4
       typescript: 4.5.4
@@ -2633,6 +2655,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       semver: 6.3.0
+    dev: true
+
+  /markdown-table/3.0.2:
+    resolution: {integrity: sha512-y8j3a5/DkJCmS5x4dMCQL+OR0+2EAq3DOtio1COSHsmW2BGXnNCK3v12hJt1LrUz5iZH5g0LmuYOjDdI+czghA==}
     dev: true
 
   /merge-stream/2.0.0:
