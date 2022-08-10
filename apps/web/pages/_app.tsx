@@ -1,7 +1,7 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
 import withTwindApp from '@twind/next/app';
-import { Layout as LayoutComp } from '../components/layout';
+import { MainLayout } from '../components/main/main-layout';
 import twindConfig from '../twind.config';
 
 /**
@@ -11,13 +11,12 @@ function App({ Component, pageProps, ...appProps }: AppProps) {
   const pathname = appProps.router.pathname;
 
   const routers = {
-    '/about': LayoutComp,
-    '/home': LayoutComp,
-    // * ---------------------------
-    '/contact': React.Fragment,
+    '/about': MainLayout,
+    '/home': MainLayout,
+    '/contact': MainLayout,
   };
 
-  const Layout = routers[pathname] ?? LayoutComp;
+  const Layout = routers[pathname] ?? MainLayout;
 
   return (
     <Layout>

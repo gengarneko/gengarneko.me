@@ -11,6 +11,7 @@
   "dependencies": {
     "@notionhq/client": "^2.1.1",
     "@twind/next": "^1.0.9",
+    "framer-motion": "^7.0.0",
     "next": "12.0.8",
     "oxide.ts": "^1.0.5",
     "p-map": "^5.5.0",
