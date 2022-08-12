@@ -23,7 +23,7 @@ const menuItems = [
 
 export const MainSidebar: FC = () => {
   return (
-    <aside className={tw`w-full md:hidden`}>
+    <aside className={tw`hidden md:block`}>
       <nav>
         <ul>
           {menuItems.map(({ href, title }) => (

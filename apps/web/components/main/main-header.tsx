@@ -9,11 +9,11 @@ export const MainHeader: FC = () => {
   return (
     <header
       className={tw`
-        sticky top-0 h-14 flex justify-center items-center border-0 border(b-4 solid black)
-        bg-[#F0E7DB] font-semibold uppercase hover:cursor-pointer
+        h-14 flex justify-center items-center border-0 border(b-2 solid black)
+        bg-[#F0E7DB] font-semibold uppercase hover:cursor-pointer px-8
       `}
     >
-      <nav className={tw`w-[768px] flex justify-between`}>
+      <nav className={tw`w-full flex justify-between`}>
         <div className={tw`flex-none`}>Logo</div>
         <div className={tw`flex-1 flex justify-end`}>
           <MenuItem text="profile" />
@@ -27,5 +27,5 @@ export const MainHeader: FC = () => {
 };
 
 const MenuItem: FC<{ text: string }> = ({ text }) => {
-  return <div className={tw`mr-4`}>{text}</div>;
+  return <div className={tw`mr-4 last:mr-0`}>{text}</div>;
 };

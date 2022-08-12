@@ -47,6 +47,7 @@ importers:
     specifiers:
       '@blog/tsconfig': workspace:*
       '@notionhq/client': ^2.1.1
+      '@twind/line-clamp': ^0.1.1
       '@twind/next': ^1.0.9
       '@types/node': ^17.0.12
       '@types/react': 18.0.1
@@ -55,6 +56,7 @@ importers:
       eslint: 8.20.0
       eslint-config-next: 12.2.2
       framer-motion: ^7.0.0
+      jotai: ^1.7.8
       next: 12.0.8
       oxide.ts: ^1.0.5
       p-all: ^4.0.0
@@ -68,8 +70,10 @@ importers:
       typescript: 4.7.4
     dependencies:
       '@notionhq/client': 2.1.1
+      '@twind/line-clamp': 0.1.1_ec74xkl7ldklxgjcg776zfoxcm
       '@twind/next': 1.0.9_ogjloond7brwepgrh4gwcirnle
       framer-motion: 7.0.0_sgv4m26tnl4echlq645clg5jc4
+      jotai: 1.7.8_lxeixztqul6ae7cp3cpkyxlhzm
       next: 12.0.8_745oc6xts5ls22atfkf2vdt4ym
       oxide.ts: 1.0.5
       p-map: 5.5.0
@@ -738,6 +742,20 @@ packages:
 
   /@rushstack/eslint-patch/1.1.4:
     resolution: {integrity: sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==}
+
+  /@twind/line-clamp/0.1.1_ec74xkl7ldklxgjcg776zfoxcm:
+    resolution: {integrity: sha512-OAbGo1traJ5KmTSlIGPAAg8RnQx3XCGriKyPJA2L6yuO0bO1DwDm6oIAAYuLuV792NDyfWeZNcwKUfBXWSnDVQ==}
+    engines: {node: '>=10.13'}
+    peerDependencies:
+      twind: '>=0.14.4'
+      typescript: ^4.1.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      twind: 0.16.17_typescript@4.7.4
+      typescript: 4.7.4
+    dev: false
 
   /@twind/next/1.0.9_ogjloond7brwepgrh4gwcirnle:
     resolution: {integrity: sha512-WzIavVwk/7vDLwbpvDaTLnjHfC53UT7+rnfZLf8TrEM5uoG4u0u/hhyP20NYLMi6WFVS0BBQtI+xbL/X7DEPUg==}
@@ -2606,6 +2624,44 @@ packages:
       '@types/node': 17.0.45
       merge-stream: 2.0.0
       supports-color: 8.1.1
+    dev: false
+
+  /jotai/1.7.8_lxeixztqul6ae7cp3cpkyxlhzm:
+    resolution: {integrity: sha512-rXwWz6uLqyZUCRzWIPiYTjI1hjskVxVpDN3lBoOHi66z6uQFkFmKwR8YhcQd+Ex4lODlReuKNIx6WwsF9aKy3g==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      '@babel/template': '*'
+      '@tanstack/query-core': '*'
+      '@urql/core': '*'
+      immer: '*'
+      optics-ts: '*'
+      react: '>=16.8'
+      valtio: '*'
+      wonka: '*'
+      xstate: '*'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      '@babel/template':
+        optional: true
+      '@tanstack/query-core':
+        optional: true
+      '@urql/core':
+        optional: true
+      immer:
+        optional: true
+      optics-ts:
+        optional: true
+      valtio:
+        optional: true
+      wonka:
+        optional: true
+      xstate:
+        optional: true
+    dependencies:
+      '@babel/core': 7.18.9
+      react: 18.2.0
     dev: false
 
   /joycon/3.1.1:
