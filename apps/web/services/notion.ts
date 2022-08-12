@@ -34,9 +34,13 @@ export class NotionService {
     let next_cursor;
     let pageIds: string[] = [];
 
+    type SortDirection = 'descending' | 'ascending';
+    const direction: SortDirection = 'descending';
+    const sorts = [{ property: 'update_time', direction }];
+
     while (has_more) {
       const start_cursor = next_cursor;
-      const response = await this.client.databases.query({ database_id, start_cursor });
+      const response = await this.client.databases.query({ database_id, sorts, start_cursor });
 
       if (!response.has_more) has_more = response.has_more;
       if (response.next_cursor) next_cursor = response.next_cursor;
@@ -45,7 +49,7 @@ export class NotionService {
       const ids = response.results.map((item) => item.id);
       pageIds = _pageIds.concat(ids);
     }
-    const pages = await pMap(pageIds, (page_id) => retrieveSinglePage(this.client, { page_id }), { concurrency: 4 });
+    // const pages = await pMap(pageIds, (page_id) => retrieveSinglePage(this.client, { page_id }), { concurrency: 4 });
 
     this._pageIds = pageIds;
     return pageIds;
@@ -56,8 +60,8 @@ export class NotionService {
    *
    * https://developers.notion.com/reference/retrieve-a-page
    */
-  public async getPostList(pageNumber = 1, pageSize = 16) {
-    const ids = this._pageIds;
+  public async getPostList(ids: string[], options?: { pageNumber: number; pageSize: number }) {
+    const { pageNumber = 1, pageSize = 10 } = options || {};
     const pageCount =
       ids.length % pageSize < 0
         ? 0

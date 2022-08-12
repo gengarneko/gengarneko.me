@@ -7,7 +7,7 @@ export const retrieveSinglePage = (
   notionClient: Client,
   { page_id }: { page_id?: string | null },
 ): Promise<GetPageResponse> => {
-  const errorMsg = 'Illegal page id';
+  const errorMsg = 'Illegal page id.';
 
   if (!page_id) {
     return Promise.reject(new Error(errorMsg));

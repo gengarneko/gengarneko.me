@@ -3,6 +3,7 @@ import { tw } from 'twind';
 import { lineClamp } from '@twind/line-clamp';
 import { HiClock, HiHeart, HiEye, HiAnnotation } from 'react-icons/hi';
 import { Post } from '../domains/post';
+import { css } from 'twind/css';
 
 // * --------------------------------------------------------------------------- inter
 
@@ -17,12 +18,12 @@ export const PostCard: FC<PostCardProps> = ({ post }) => {
     <div className={tw`w-full border-0 border(b-0 solid black)`}>
       <div
         className={tw`
-        flex justify-start w-full rounded p-1 hover:cursor-pointer mb-2
+        flex justify-start w-full rounded p-1 hover:cursor-pointer mb-2 first:mt-2
         border(2 solid [#F0E7DB]) hover:border(2 solid black) duration-150
       `}
       >
         <div className={tw`flex w-full`}>
-          <img alt="" src={post.cover} className={tw`object-contain w-40 h-full rounded`} />
+          <img alt="" src={post.cover} className={tw`object-cover w-40 h-24 rounded flex-none`} />
 
           <div className={tw`shrink overflow-hidden flex flex-col px-2`}>
             <div className={tw`mb-1 truncate`}>{post.title}</div>
@@ -31,7 +32,7 @@ export const PostCard: FC<PostCardProps> = ({ post }) => {
             </div>
 
             <div className={tw`flex items-center text-[#4b5563] mb-1`}>
-              <PostCardIconGroup icon={<HiClock />} text="11 months ago" className={tw`w-[12rem]`} />
+              <PostCardIconGroup icon={<HiClock />} text="11 months ago" className={tw`date-icon ${width}`} />
               <PostCardIconGroup icon={<HiEye />} text="890890890890890890" />
               <PostCardIconGroup icon={<HiAnnotation />} text="111" />
               <PostCardIconGroup icon={<HiHeart />} text="890890890890890890" />
@@ -53,3 +54,11 @@ const PostCardIconGroup: FC<{ icon: ReactNode; text: string; className?: string 
     </div>
   );
 };
+
+// * --------------------------------------------------------------------------- style
+
+const width = css`
+  &.date-icon {
+    width: 12rem;
+  }
+`;
