@@ -63,6 +63,7 @@ importers:
       react: 18.2.0
       react-dom: 17.0.2
       react-icons: ^4.4.0
+      slugify: ^1.6.5
       twind: ^0.16.17
       typescript: 4.7.4
     dependencies:
@@ -86,6 +87,7 @@ importers:
       '@types/react-dom': 17.0.17
       eslint: 8.20.0
       eslint-config-next: 12.2.2_he2ccbldppg44uulnyq4rwocfa
+      slugify: 1.6.5
       typescript: 4.7.4
 
   packages/markdown-table:
@@ -3691,6 +3693,11 @@ packages:
       ansi-styles: 4.3.0
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
+    dev: true
+
+  /slugify/1.6.5:
+    resolution: {integrity: sha512-8mo9bslnBO3tr5PEVFzMPIWwWnipGS0xVbYf65zxDqfNwmzYn1LpiKNrR6DlClusuvo+hDHd1zKpmfAe83NQSQ==}
+    engines: {node: '>=8.0.0'}
     dev: true
 
   /source-map-js/1.0.2:

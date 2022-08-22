@@ -66,6 +66,14 @@ export class NotionService {
 
     return posts;
   }
+
+  /**
+   * get blocks
+   */
+  public async getPostBlocks(block_id: string) {
+    const blocks = await this.client.blocks.children.list({ block_id });
+    return blocks;
+  }
 }
 
 // * --------------------------------------------------------------------------- util

@@ -14,8 +14,10 @@ export interface PostCardProps {
 // * --------------------------------------------------------------------------- comp
 
 export const PostCard: FC<PostCardProps> = ({ post }) => {
+  const handleClickPost = () => {};
+
   return (
-    <div className={tw`w-full border-0 border(b-0 solid black)`}>
+    <div className={tw`w-full border-0 border(b-0 solid black)`} onClick={handleClickPost}>
       <div
         className={tw`
         flex justify-start w-full rounded p-1 hover:cursor-pointer mb-2 first:mt-2

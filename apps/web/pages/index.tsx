@@ -6,6 +6,8 @@ import { NotionService } from '../services/notion';
 import { currentPageState, pageSizeState } from '../store';
 import { PostCard } from '../components/post-card';
 import { MainFooter } from '../components/main/main-footer';
+import Link from 'next/link';
+import slugify from 'slugify';
 
 // * --------------------------------------------------------------------------- page
 
@@ -34,7 +36,7 @@ const Home: NextPage = ({ list }: InferGetStaticPropsType<typeof getStaticProps>
     <div className={tw`flex flex-col w-full overflow-auto ${scroll}`}>
       <div className={tw`flex flex-col w-full align-center justify-start relative`}>
         {postList.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <PostCard post={post} key={post.id} />
         ))}
 
         <div className={tw`flex pb-2 px-2 justify-between`}>
