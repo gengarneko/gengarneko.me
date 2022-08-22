@@ -1,58 +1,19 @@
 import { Client } from '@notionhq/client';
-import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
-import pMap from 'p-map';
-import { retrieveSinglePage } from '../utils/retrieve-single-page';
-import { getSinglePost } from '../utils/get-single-post';
-import { mockList } from './_mock';
+import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { Post } from '../domains/post';
+import { mock_results } from './mock';
+
+// * --------------------------------------------------------------------------- const
+
+const DEFAULT_SORT = [{ property: 'update_time', direction: 'descending' as 'descending' | 'ascending' }];
 
 // * ---------------------------------------------------------------------------
 
 export class NotionService {
   private readonly client: Client;
 
-  private _pageIds: string[];
-  private set pageIds(value: string[]) {
-    this._pageIds = value;
-  }
-  private get pageIds(): string[] {
-    return this._pageIds;
-  }
-
   public constructor() {
     this.client = new Client({ auth: process.env.NOTION_ACCESS_TOKEN });
-  }
-
-  /**
-   * get all page ids from single database
-   *
-   * https://developers.notion.com/reference/post-database-query
-   */
-  public async getPostIds(): Promise<string[]> {
-    const database_id = process.env.NOTION_BLOG_DATABASE_ID ?? '';
-
-    let has_more = true;
-    let next_cursor;
-    let pageIds: string[] = [];
-
-    type SortDirection = 'descending' | 'ascending';
-    const direction: SortDirection = 'descending';
-    const sorts = [{ property: 'update_time', direction }];
-
-    while (has_more) {
-      const start_cursor = next_cursor;
-      const response = await this.client.databases.query({ database_id, sorts, start_cursor });
-
-      if (!response.has_more) has_more = response.has_more;
-      if (response.next_cursor) next_cursor = response.next_cursor;
-
-      const _pageIds = pageIds;
-      const ids = response.results.map((item) => item.id);
-      pageIds = _pageIds.concat(ids);
-    }
-    // const pages = await pMap(pageIds, (page_id) => retrieveSinglePage(this.client, { page_id }), { concurrency: 4 });
-
-    this._pageIds = pageIds;
-    return pageIds;
   }
 
   /**
@@ -60,48 +21,92 @@ export class NotionService {
    *
    * https://developers.notion.com/reference/retrieve-a-page
    */
-  public async getPostList(ids: string[], options?: { pageNumber: number; pageSize: number }) {
-    const { pageNumber = 1, pageSize = 10 } = options || {};
-    const pageCount =
-      ids.length % pageSize < 0
-        ? 0
-        : ids.length % pageSize > 0
-        ? Math.floor(ids.length / pageSize) + 1
-        : Math.floor(ids.length / pageSize);
+  public async getPostList() {
+    const database_id = process.env.NOTION_BLOG_DATABASE_ID ?? '';
 
-    // * ---------------------------
+    // * --------------------------- fetch list
 
-    const group = (array: string[], subGroupLength: number) => {
-      let index = 0;
-      const result: string[][] = [];
+    const sorts = DEFAULT_SORT;
+    let has_more = true;
+    let start_cursor;
+    // let results: QueryDatabaseResponse['results'] = [];
+    // @ts-ignore
+    let results: QueryDatabaseResponse['results'] = mock_results;
 
-      while (index < array.length) {
-        const newArr = array.slice(index, index + subGroupLength);
-        result.push(newArr);
-        index += subGroupLength;
-      }
+    // while (has_more) {
+    while (!has_more) {
+      const databaseData = await this.client.databases.query({ database_id, sorts, start_cursor });
+      has_more = databaseData.has_more;
+      start_cursor = databaseData.next_cursor;
+      // results = results.concat(databaseData.results);
+    }
 
-      return result;
-    };
+    // * --------------------------- trans to post
 
-    const groupedIds = group(ids, pageSize);
-    const pageIds = groupedIds[pageNumber - 1] ?? [];
+    const posts: Post[] = results.map((page: any) => {
+      const cover = page.cover && page.cover.type === 'external' ? page.cover.external.url : null;
+      const getVal = (name: string) => getNotionPropertyValue(page?.properties[name]);
 
-    // * ---------------------------
-
-    const pages = await pMap(pageIds, (page_id) => retrieveSinglePage(this.client, { page_id }), { concurrency: 4 });
-    const posts = await pMap(pages, (page: PageObjectResponse) => getSinglePost(this.client, page));
-    console.log(posts);
+      return {
+        id: page.id,
+        cover,
+        title: getVal('title'),
+        description: getVal('description'),
+        create_time: getVal('create_time'),
+        update_time: getVal('update_time'),
+        likes_count: getVal('likes_count'),
+        views_count: getVal('views_count'),
+        author: getVal('author'),
+        status: getVal('status'),
+        tags: getVal('tags'),
+      };
+    });
 
     // * ---------------------------
 
     return posts;
   }
-
-  /**
-   * get mock page list
-   */
-  public getMockPostList = () => {
-    return mockList;
-  };
 }
+
+// * --------------------------------------------------------------------------- util
+
+export const getNotionPropertyValue = (property: any) => {
+  if (!property) return null;
+
+  let res;
+
+  switch (property.type) {
+    case 'select':
+      res = property.select.name;
+      break;
+
+    case 'date':
+      res = property.date.start;
+      break;
+
+    case 'multi_select':
+      res = property.multi_select;
+      break;
+
+    case 'number':
+      res = property.number;
+      break;
+
+    case 'title':
+      res = property.title[0].plain_text;
+      break;
+
+    case 'rich_text':
+      res = property.rich_text[0].plain_text;
+      break;
+
+    case 'people':
+      res = property.people[0].name;
+      break;
+
+    default:
+      res = undefined;
+  }
+
+  return res ?? null;
+};

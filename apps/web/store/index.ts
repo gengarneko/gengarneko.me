@@ -20,18 +20,7 @@ export const preparePostData = async () => {
   return { [id]: prefetched };
 };
 
-// * ---------------------------------------------------------------------------
+// * --------------------------------------------------------------------------- list
 
-export const postListPageId = atom(INITIAL_PAGE_ID);
-
-export const postListCache = atom({});
-
-export const postListData = atom((get) => {
-  const id = get(postListPageId);
-  const cache = get(postListCache);
-
-  if (isSSR || cache[id]) {
-    return cache[id] || EMPTY_POST_DATA;
-  }
-  return new NotionService().getPostIds();
-});
+export const pageSizeState = atom(10);
+export const currentPageState = atom(1);

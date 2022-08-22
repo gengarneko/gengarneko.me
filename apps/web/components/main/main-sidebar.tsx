@@ -44,7 +44,7 @@ export const MainSidebar: FC<{ className?: string }> = ({ className }) => {
           {menuItems.map(({ href, title }) => (
             <li className={tw`m-2`} key={title}>
               <Link href={href}>
-                <a className={tw`flex p-2 rounded hover:bg-fuchsia-400 cursor-pointer`}>{title}</a>
+                <a className={tw`flex p-2 rounded cursor-pointer`}>{title}</a>
               </Link>
             </li>
           ))}
@@ -56,7 +56,7 @@ export const MainSidebar: FC<{ className?: string }> = ({ className }) => {
           {list2.map(({ href, title }) => (
             <li className={tw`m-2`} key={title}>
               <Link href={href}>
-                <a className={tw`flex p-2 rounded hover:bg-fuchsia-400 cursor-pointer`}>{title}</a>
+                <a className={tw`flex p-2 rounded cursor-pointer`}>{title}</a>
               </Link>
             </li>
           ))}
