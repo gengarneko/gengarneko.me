@@ -18,7 +18,7 @@ export class NotionToMarkdown {
   private readonly notionClient: Client;
   private readonly transformers: Record<string, CustomTransformer>;
 
-  private constructor(options: NotionToMarkdownOptions) {
+  public constructor(options: NotionToMarkdownOptions) {
     this.notionClient = options.notionClient;
     this.transformers = {};
   }
@@ -35,7 +35,7 @@ export class NotionToMarkdown {
 
   // * ---------------------------
 
-  public toMarkdownString(mdBlocks: MdBlock[] = [], nestingLevel = 0): string {
+  public toMarkdownString(mdBlocks: MdBlock[] = [], nestingLevel: number = 0): string {
     let mdString = '';
     mdBlocks.forEach((mdBlocks) => {
       // process parent blocks

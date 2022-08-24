@@ -34,3 +34,6 @@ yarn-error.log*
 
 # ide
 .idea
+
+dist/
+/packages/notion-to-md/dist/

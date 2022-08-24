@@ -22,6 +22,7 @@ export class NotionService {
    * https://developers.notion.com/reference/retrieve-a-page
    */
   public async getPostList() {
+    console.log('getPostList');
     const database_id = process.env.NOTION_BLOG_DATABASE_ID ?? '';
 
     // * --------------------------- fetch list

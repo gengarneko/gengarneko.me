@@ -1,5 +1,5 @@
 {
-  "name": "@gengarneko/notion-to-markdown",
+  "name": "@blog/notion-to-markdown",
   "version": "0.0.0",
   "description": "Convert notion pages, block and list of blocks to markdown (supports nesting).",
   "keywords": [
@@ -37,7 +37,7 @@
   "devDependencies": {
     "@gengarneko/prettier-config": "^0.1.6",
     "@gengarneko/markdown-table": "workspace:*",
-    "@notionhq/client": "^2.1.1",
+    "@notionhq/client": "^1.0.4",
     "@vitest/ui": "^0.20.3",
     "c8": "^7.12.0",
     "markdown-table": "^3.0.2",

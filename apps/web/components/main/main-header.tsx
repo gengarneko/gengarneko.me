@@ -28,10 +28,9 @@ export const MainHeader: FC = () => {
           </div>
         </div>
 
-        <div className={tw`flex-1 flex justify-end`}>
-          <MenuItem text="profile" />
-          <MenuItem text="works" />
-          <MenuItem text="tech" />
+        <div className={tw`flex-1 flex justify-end items-center text-sm`}>
+          <MenuItem text="language" />
+          <MenuItem text="theme" />
 
           <MenuItem text="github" onClick={() => window.open('https://github.com/gengarneko')} />
         </div>

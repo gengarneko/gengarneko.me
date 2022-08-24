@@ -7,30 +7,27 @@ import Link from 'next/link';
 const menuItems = [
   {
     href: '/home',
-    title: 'All',
+    title: 'Home',
   },
   {
-    href: '/about',
-    title: 'Frontend',
+    href: '/code',
+    title: 'Code',
+  },
+  {
+    href: '/essay',
+    title: 'Essay',
   },
   {
     href: '/contact',
-    title: 'Backend',
+    title: 'Github',
   },
   {
     href: '/contact',
-    title: 'Teamwork',
-  },
-];
-
-const list2 = [
-  {
-    href: '/home',
-    title: 'Fitness',
+    title: 'Profile',
   },
   {
-    href: '/home',
-    title: 'Reading Notes',
+    href: '/contact',
+    title: 'Tools',
   },
 ];
 
@@ -42,18 +39,6 @@ export const MainSidebar: FC<{ className?: string }> = ({ className }) => {
       <nav>
         <ul>
           {menuItems.map(({ href, title }) => (
-            <li className={tw`m-2`} key={title}>
-              <Link href={href}>
-                <a className={tw`flex p-2 rounded cursor-pointer`}>{title}</a>
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className={tw`w-32 h-0.5 bg-black`} />
-
-        <ul>
-          {list2.map(({ href, title }) => (
             <li className={tw`m-2`} key={title}>
               <Link href={href}>
                 <a className={tw`flex p-2 rounded cursor-pointer`}>{title}</a>

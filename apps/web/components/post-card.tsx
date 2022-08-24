@@ -1,9 +1,11 @@
 import { FC, ReactNode } from 'react';
+import { useRouter } from 'next/router';
 import { tw } from 'twind';
+import { css } from 'twind/css';
 import { lineClamp } from '@twind/line-clamp';
 import { HiClock, HiHeart, HiEye, HiAnnotation } from 'react-icons/hi';
 import { Post } from '../domains/post';
-import { css } from 'twind/css';
+import slugify from 'slugify';
 
 // * --------------------------------------------------------------------------- inter
 
@@ -14,7 +16,12 @@ export interface PostCardProps {
 // * --------------------------------------------------------------------------- comp
 
 export const PostCard: FC<PostCardProps> = ({ post }) => {
-  const handleClickPost = () => {};
+  const router = useRouter();
+
+  const handleClickPost = () => {
+    const href = `/post/${slugify(post.title).toLowerCase()}`;
+    router.push(href);
+  };
 
   return (
     <div className={tw`w-full border-0 border(b-0 solid black)`} onClick={handleClickPost}>
@@ -27,7 +34,7 @@ export const PostCard: FC<PostCardProps> = ({ post }) => {
         <div className={tw`flex w-full`}>
           <img alt="" src={post.cover} className={tw`object-cover w-40 h-24 rounded flex-none`} />
 
-          <div className={tw`shrink overflow-hidden flex flex-col px-2`}>
+          <div className={tw`overflow-hidden flex flex-col px-2`}>
             <div className={tw`mb-1 truncate`}>{post.title}</div>
             <div className={tw`flex-1 text-sm text-[#4b5563]`}>
               <div className={tw`h-10 ${lineClamp(2)}`}>{post.description}</div>
