@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { tw } from '@blog/css';
 import Link from 'next/link';
 
@@ -6,27 +7,27 @@ import Link from 'next/link';
 
 const menuItems = [
   {
-    href: '/home',
+    href: '/',
     title: 'Home',
   },
   {
-    href: '/code',
+    href: '/',
     title: 'Code',
   },
   {
-    href: '/essay',
+    href: '/',
     title: 'Essay',
   },
   {
-    href: '/contact',
+    href: '/',
     title: 'Github',
   },
   {
-    href: '/contact',
+    href: '/',
     title: 'Profile',
   },
   {
-    href: '/contact',
+    href: '/',
     title: 'Tools',
   },
 ];

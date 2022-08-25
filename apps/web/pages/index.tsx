@@ -38,7 +38,7 @@ const Index: NextPageWithLayout = ({ list }: InferGetStaticPropsType<typeof getS
         </div>
       </main>
 
-      <aside className={tw`w-60`}>sidebar</aside>
+      <aside className={tw`w-60 pl-8 pt-2`}>sidebar</aside>
     </>
   );
 };

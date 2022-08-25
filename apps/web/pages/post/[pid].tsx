@@ -12,11 +12,15 @@ import { NotionService } from '@/services/notion';
 export default function Post({ post }) {
   return (
     <MainLayout>
-      <div className={tw`flex h-full w-full flex-col justify-start items-start p-4`}>
-        <div className={tw`w-full h-full bg-white z-10 border(2 solid black) px-6 py-4 ${shadow}`}>
-          <ReactMarkdown>{post.markdown}</ReactMarkdown>
+      <main className={tw`w-[600px]`}>
+        <div className={tw`flex min-h-full w-full flex-col justify-start items-start p-4`}>
+          <div className={tw`flex-1 w-full h-full bg-white z-10 border(2 solid black) px-6 py-4 ${shadow}`}>
+            <ReactMarkdown>{post.markdown}</ReactMarkdown>
+          </div>
         </div>
-      </div>
+      </main>
+
+      <aside className={tw`pl-8 pt-2`}>article aside</aside>
     </MainLayout>
   );
 }
