@@ -39,8 +39,8 @@ export const MainSidebar: FC<{ className?: string }> = ({ className }) => {
     <aside className={tw`w-60 flex-none pl-10 ${className}`}>
       <nav>
         <ul>
-          {menuItems.map(({ href, title }) => (
-            <li className={tw`m-2`} key={title}>
+          {menuItems.map(({ href, title }, index) => (
+            <li className={tw`m-2 text-[${index ? '#999' : 'black'}] hover:underline hover:text-[#333]`} key={title}>
               <Link href={href}>
                 <a className={tw`flex p-2 rounded cursor-pointer`}>{title}</a>
               </Link>

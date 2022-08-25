@@ -2,6 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  images: {
+    domains: ['www.notion.so'],
+  },
+  experimental: {
+    images: {
+      allowFutureImage: true,
+    },
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
