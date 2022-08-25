@@ -1,9 +1,11 @@
 import { FC, ReactNode } from 'react';
+
+import { tw, css, lineClamp } from '@blog/css';
 import { useRouter } from 'next/router';
-import { tw, css, lineClamp, cx } from '@blog/css';
 import { HiClock, HiHeart, HiEye, HiAnnotation } from 'react-icons/hi';
 import slugify from 'slugify';
-import { Post } from '../domains/post';
+
+import { Post } from '@/domains/post';
 
 // * --------------------------------------------------------------------------- inter
 

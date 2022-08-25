@@ -1,14 +1,16 @@
 import { ReactElement } from 'react';
+
 import { tw, css } from '@blog/css';
-import type { NextPageWithLayout } from './_app';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
-// * ---------------------------
-import { Post } from '../domains/post';
-import { NotionService } from '../services/notion';
-import { PostCard } from '../components/post-card';
-import { MainFooter } from '../components/main/main-footer';
-import { MainLayout } from '../components/main/main-layout';
-import { usePagination } from '../hooks/usePagination';
+
+import { MainFooter } from '@/components/main/main-footer';
+import { MainLayout } from '@/components/main/main-layout';
+import { PostCard } from '@/components/post-card';
+import { Post } from '@/domains/post';
+import { usePagination } from '@/hooks/usePagination';
+import { NotionService } from '@/services/notion';
+
+import type { NextPageWithLayout } from './_app';
 
 // * --------------------------------------------------------------------------- page
 

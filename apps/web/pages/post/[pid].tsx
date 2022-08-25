@@ -1,20 +1,23 @@
-import { tw } from '@blog/css';
-import slugify from 'slugify';
+import { tw, css } from '@blog/css';
+import { NotionToMarkdown } from '@blog/n2m';
 import { Client } from '@notionhq/client';
 import ReactMarkdown from 'react-markdown';
-import { NotionToMarkdown } from '@blog/n2m';
-import { NotionService } from '../../services/notion';
-import { css } from '@blog/css';
+import slugify from 'slugify';
+
+import { MainLayout } from '@/components/main/main-layout';
+import { NotionService } from '@/services/notion';
 
 // * --------------------------------------------------------------------------- page
 
 export default function Post({ post }) {
   return (
-    <div className={tw`flex h-full w-full flex-col justify-start items-start p-4`}>
-      <div className={tw`w-full h-full bg-white z-10 border(2 solid black) px-6 py-4 ${shadow}`}>
-        <ReactMarkdown>{post.markdown}</ReactMarkdown>
+    <MainLayout>
+      <div className={tw`flex h-full w-full flex-col justify-start items-start p-4`}>
+        <div className={tw`w-full h-full bg-white z-10 border(2 solid black) px-6 py-4 ${shadow}`}>
+          <ReactMarkdown>{post.markdown}</ReactMarkdown>
+        </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }
 
