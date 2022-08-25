@@ -1,10 +1,13 @@
 import { FC, ReactNode } from 'react';
 
-import { tw, css, lineClamp, cx } from '@blog/css';
-import Image from 'next/future/image';
+import { lineClamp } from '@twind/line-clamp';
+import { clsx as cx } from 'clsx';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { HiClock, HiHeart, HiEye, HiAnnotation } from 'react-icons/hi';
 import slugify from 'slugify';
+import { tw } from 'twind';
+import { css } from 'twind/css';
 
 import { Post } from '@/domains/post';
 
@@ -24,6 +27,11 @@ export const PostCard: FC<PostCardProps> = ({ post }) => {
     router.push(href);
   };
 
+  if (!post) return null;
+
+  const default_cover = 'https://www.notion.so/images/page-cover/solid_red.png';
+  const src = post.cover ?? default_cover;
+
   return (
     <div className={tw`w-full border-0 border(b-0 solid black)`} onClick={handleClickPost}>
       <div
@@ -34,7 +42,7 @@ export const PostCard: FC<PostCardProps> = ({ post }) => {
       >
         <div className={tw`flex w-full`}>
           <div className={tw`w-40 h-24 overflow-hidden rounded flex-none`}>
-            <Image width={160} height={96} alt={post.cover} src={post.cover} />
+            <Image src={src} width={160} height={96} alt="" objectFit="cover" />
           </div>
 
           <div className={tw`overflow-hidden flex flex-col px-2`}>

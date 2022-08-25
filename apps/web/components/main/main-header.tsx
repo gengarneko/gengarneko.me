@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { tw } from '@blog/css';
+
 import Link from 'next/link';
+import { tw } from 'twind';
 
 // * --------------------------------------------------------------------------- comp
 

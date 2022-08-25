@@ -1,8 +1,9 @@
-import { tw, css } from '@blog/css';
 import { NotionToMarkdown } from '@blog/n2m';
 import { Client } from '@notionhq/client';
 import ReactMarkdown from 'react-markdown';
 import slugify from 'slugify';
+import { tw } from 'twind';
+import { css } from 'twind/css';
 
 import { MainLayout } from '@/components/main/main-layout';
 import { NotionService } from '@/services/notion';

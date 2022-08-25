@@ -1,9 +1,11 @@
 import { FC, ReactNode } from 'react';
+
+import { tw } from 'twind';
+import { css } from 'twind/css';
+
 import { Header } from '../header';
 import { MainHeader } from './main-header';
 import { MainSidebar } from './main-sidebar';
-import { tw } from '@blog/css';
-import { css } from '@blog/css';
 
 // * --------------------------------------------------------------------------- comp
 

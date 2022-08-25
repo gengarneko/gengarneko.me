@@ -5,11 +5,6 @@ const nextConfig = {
   images: {
     domains: ['www.notion.so'],
   },
-  experimental: {
-    images: {
-      allowFutureImage: true,
-    },
-  },
 };
 
 module.exports = nextConfig;

@@ -1,8 +1,10 @@
 import React, { ReactElement, ReactNode } from 'react';
+
+import withTwindApp from '@twind/next/app';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+
 import twindConfig from '../twind.config';
-import { withTwindApp } from '@blog/css';
 
 // * --------------------------------------------------------------------------- type
 

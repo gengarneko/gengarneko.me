@@ -1,6 +1,8 @@
 import { Client } from '@notionhq/client';
 import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
-import { Post } from '../domains/post';
+
+import { Post } from '@/domains/post';
+
 import { mock_results } from './mock';
 
 // * --------------------------------------------------------------------------- const
@@ -22,7 +24,6 @@ export class NotionService {
    * https://developers.notion.com/reference/retrieve-a-page
    */
   public async getPostList() {
-    console.log('getPostList');
     const database_id = process.env.NOTION_BLOG_DATABASE_ID ?? '';
 
     // * --------------------------- fetch list
@@ -30,23 +31,23 @@ export class NotionService {
     const sorts = DEFAULT_SORT;
     let has_more = true;
     let start_cursor;
-    // let results: QueryDatabaseResponse['results'] = [];
+    let results: QueryDatabaseResponse['results'] = [];
     // @ts-ignore
-    let results: QueryDatabaseResponse['results'] = mock_results;
+    // let results: QueryDatabaseResponse['results'] = mock_results;
 
-    // while (has_more) {
-    while (!has_more) {
+    while (has_more) {
+      // while (!has_more) {
       const databaseData = await this.client.databases.query({ database_id, sorts, start_cursor });
       has_more = databaseData.has_more;
       start_cursor = databaseData.next_cursor;
-      // results = results.concat(databaseData.results);
+      results = results.concat(databaseData.results);
     }
 
     // * --------------------------- trans to post
 
     const posts: Post[] = results.map((page: any) => {
       const cover = page.cover && page.cover.type === 'external' ? page.cover.external.url : null;
-      const getVal = (name: string) => getNotionPropertyValue(page?.properties[name]);
+      const getVal = (name: string) => getNotionPropertyValue(page?.properties?.[name]);
 
       return {
         id: page.id,
@@ -71,16 +72,15 @@ export class NotionService {
   /**
    * get blocks
    */
-  public async getPostBlocks(block_id: string) {
-    const blocks = await this.client.blocks.children.list({ block_id });
-    return blocks;
+  public async getPostBlocks(block_id: string): Promise<any> {
+    return await this.client.blocks.children.list({ block_id });
   }
 }
 
 // * --------------------------------------------------------------------------- util
 
 export const getNotionPropertyValue = (property: any) => {
-  if (!property) return null;
+  if (!property || !property.type) return null;
 
   let res;
 
@@ -102,19 +102,19 @@ export const getNotionPropertyValue = (property: any) => {
       break;
 
     case 'title':
-      res = property.title[0].plain_text;
+      res = property.title[0]?.plain_text;
       break;
 
     case 'rich_text':
-      res = property.rich_text[0].plain_text;
+      res = property.rich_text[0]?.plain_text;
       break;
 
     case 'people':
-      res = property.people[0].name;
+      res = property.people[0]?.name;
       break;
 
     default:
-      res = undefined;
+      res = null;
   }
 
   return res ?? null;

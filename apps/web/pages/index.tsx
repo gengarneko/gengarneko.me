@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
 
-import { tw, css } from '@blog/css';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
+import { tw } from 'twind';
+import { css } from 'twind/css';
 
 import { MainFooter } from '@/components/main/main-footer';
 import { MainLayout } from '@/components/main/main-layout';
