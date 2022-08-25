@@ -2,7 +2,7 @@ import { tw } from '@blog/css';
 import slugify from 'slugify';
 import { Client } from '@notionhq/client';
 import ReactMarkdown from 'react-markdown';
-import { NotionToMarkdown } from '@blog/notion-to-markdown';
+import { NotionToMarkdown } from '@blog/n2m';
 import { NotionService } from '../../services/notion';
 import { css } from '@blog/css';
 

@@ -1,37 +1,19 @@
 import { ReactElement } from 'react';
-import type { GetStaticProps, InferGetStaticPropsType } from 'next';
-import type { NextPageWithLayout } from './_app';
 import { tw, css } from '@blog/css';
-import { useAtom, useAtomValue } from 'jotai';
-import { NotionService } from '../services/notion';
-import { currentPageState, pageSizeState } from '../store';
+import type { NextPageWithLayout } from './_app';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
 // * ---------------------------
+import { Post } from '../domains/post';
+import { NotionService } from '../services/notion';
 import { PostCard } from '../components/post-card';
 import { MainFooter } from '../components/main/main-footer';
 import { MainLayout } from '../components/main/main-layout';
+import { usePagination } from '../hooks/usePagination';
 
 // * --------------------------------------------------------------------------- page
 
 const Index: NextPageWithLayout = ({ list }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const pageSize = useAtomValue(pageSizeState);
-  const [currentPage, setCurrentPage] = useAtom(currentPageState);
-
-  const totalPostsNumber = list.length;
-
-  const pageCount =
-    totalPostsNumber % pageSize < 0
-      ? 0
-      : totalPostsNumber % pageSize > 0
-      ? Math.floor(totalPostsNumber / pageSize) + 1
-      : Math.floor(totalPostsNumber / pageSize);
-
-  const isLastPage = currentPage === pageCount;
-  const loadedPostsNumber = isLastPage ? totalPostsNumber : currentPage * pageSize;
-  const postList = list.slice(0, loadedPostsNumber);
-
-  const handleLoadMore = () => {
-    setCurrentPage((prev) => (isLastPage ? prev : prev + 1));
-  };
+  const { list: postList, loaded, total, onPrev } = usePagination<Post>(list);
 
   return (
     <>
@@ -43,8 +25,8 @@ const Index: NextPageWithLayout = ({ list }: InferGetStaticPropsType<typeof getS
             ))}
 
             <div className={tw`flex pb-2 px-2 justify-between`}>
-              <div>{`${loadedPostsNumber} / ${totalPostsNumber}`}</div>
-              <div className={tw`hover:cursor-pointer`} onClick={handleLoadMore}>
+              <div>{`${loaded} / ${total}`}</div>
+              <div className={tw`hover:cursor-pointer`} onClick={onPrev}>
                 Load More
               </div>
             </div>

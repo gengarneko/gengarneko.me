@@ -1,5 +1,5 @@
 {
-  "name": "@blog/notion-to-markdown",
+  "name": "@blog/n2m",
   "version": "0.0.0",
   "description": "Convert notion pages, block and list of blocks to markdown (supports nesting).",
   "keywords": [
