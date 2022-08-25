@@ -2,8 +2,8 @@ import { FC, ReactNode } from 'react';
 import { Header } from '../header';
 import { MainHeader } from './main-header';
 import { MainSidebar } from './main-sidebar';
-import { tw } from 'twind';
-import { css } from 'twind/css';
+import { tw } from '@blog/css';
+import { css } from '@blog/css';
 
 // * --------------------------------------------------------------------------- comp
 
@@ -17,10 +17,7 @@ export const MainLayout: FC<{ children: ReactNode }> = ({ children }) => {
 
         <div className={tw`flex flex-1 w-full justify-center`}>
           <MainSidebar className={tw`hidden md:block`} />
-
-          <main className={tw`flex justify-center w-[600px] overflow-hidden ${main}`}>{children}</main>
-
-          <MainSidebar className={tw`hidden xl:block`} />
+          {children}
         </div>
       </div>
     </>

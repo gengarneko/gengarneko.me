@@ -1,10 +1,10 @@
-import { tw } from 'twind';
+import { tw } from '@blog/css';
 import slugify from 'slugify';
 import { Client } from '@notionhq/client';
 import ReactMarkdown from 'react-markdown';
 import { NotionToMarkdown } from '@blog/notion-to-markdown';
 import { NotionService } from '../../services/notion';
-import { css } from 'twind/css';
+import { css } from '@blog/css';
 
 // * --------------------------------------------------------------------------- page
 

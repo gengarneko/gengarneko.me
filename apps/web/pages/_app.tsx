@@ -1,31 +1,29 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
+import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import withTwindApp from '@twind/next/app';
-import { MainLayout } from '../components/main/main-layout';
 import twindConfig from '../twind.config';
+import { withTwindApp } from '@blog/css';
+
+// * --------------------------------------------------------------------------- type
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
 
 // * --------------------------------------------------------------------------- comp
 
 /**
- * https://nextjs.org/docs/advanced-features/custom-app
+ * https://nextjs.org/docs/basic-features/layouts
  */
-function App({ Component, pageProps, ...appProps }: AppProps) {
-  const pathname = appProps.router.pathname;
+function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+  const AppComponent = Component as any;
 
-  const routers = {
-    '/about': MainLayout,
-    '/home': MainLayout,
-    '/contact': MainLayout,
-  };
-
-  const Layout = routers[pathname] ?? MainLayout;
-
-  return (
-    <Layout>
-      {/* @ts-ignore */}
-      <Component {...pageProps} />
-    </Layout>
-  );
+  return getLayout(<AppComponent {...pageProps} />);
 }
 
 export default withTwindApp(twindConfig, App);

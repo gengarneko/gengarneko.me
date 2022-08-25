@@ -1,17 +1,18 @@
-import type { NextPage, GetStaticProps, InferGetStaticPropsType } from 'next';
-import { tw } from 'twind';
-import { css } from 'twind/css';
+import { ReactElement } from 'react';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
+import type { NextPageWithLayout } from './_app';
+import { tw, css } from '@blog/css';
 import { useAtom, useAtomValue } from 'jotai';
 import { NotionService } from '../services/notion';
 import { currentPageState, pageSizeState } from '../store';
+// * ---------------------------
 import { PostCard } from '../components/post-card';
 import { MainFooter } from '../components/main/main-footer';
-import Link from 'next/link';
-import slugify from 'slugify';
+import { MainLayout } from '../components/main/main-layout';
 
 // * --------------------------------------------------------------------------- page
 
-const Home: NextPage = ({ list }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Index: NextPageWithLayout = ({ list }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const pageSize = useAtomValue(pageSizeState);
   const [currentPage, setCurrentPage] = useAtom(currentPageState);
 
@@ -33,23 +34,35 @@ const Home: NextPage = ({ list }: InferGetStaticPropsType<typeof getStaticProps>
   };
 
   return (
-    <div className={tw`flex flex-col w-full overflow-auto ${scroll}`}>
-      <div className={tw`flex flex-col w-full align-center justify-start relative`}>
-        {postList.map((post) => (
-          <PostCard post={post} key={post.id} />
-        ))}
+    <>
+      <main className={tw`flex justify-center w-[600px] overflow-hidden ${main}`}>
+        <div className={tw`flex flex-col w-full overflow-auto ${scroll}`}>
+          <div className={tw`flex flex-col w-full align-center justify-start relative`}>
+            {postList.map((post) => (
+              <PostCard post={post} key={post.id} />
+            ))}
 
-        <div className={tw`flex pb-2 px-2 justify-between`}>
-          <div>{`${loadedPostsNumber} / ${totalPostsNumber}`}</div>
-          <div className={tw`hover:cursor-pointer`} onClick={handleLoadMore}>
-            Load More
+            <div className={tw`flex pb-2 px-2 justify-between`}>
+              <div>{`${loadedPostsNumber} / ${totalPostsNumber}`}</div>
+              <div className={tw`hover:cursor-pointer`} onClick={handleLoadMore}>
+                Load More
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      <MainFooter />
-    </div>
+          <MainFooter />
+        </div>
+      </main>
+
+      <aside className={tw`w-60`}>sidebar</aside>
+    </>
   );
+};
+
+// * --------------------------------------------------------------------------- layout
+
+Index.getLayout = (children: ReactElement) => {
+  return <MainLayout>{children}</MainLayout>;
 };
 
 // * --------------------------------------------------------------------------- style
@@ -60,7 +73,11 @@ const scroll = css`
   }
 `;
 
-// * ---------------------------------------------------------------------------
+const main = css`
+  height: calc(100vh - 3rem);
+`;
+
+// * --------------------------------------------------------------------------- getStaticProps
 
 export const getStaticProps: GetStaticProps = async () => {
   const notion = new NotionService();
@@ -70,4 +87,4 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { list, test } };
 };
 
-export default Home;
+export default Index;

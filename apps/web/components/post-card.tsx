@@ -1,11 +1,9 @@
 import { FC, ReactNode } from 'react';
 import { useRouter } from 'next/router';
-import { tw } from 'twind';
-import { css } from 'twind/css';
-import { lineClamp } from '@twind/line-clamp';
+import { tw, css, lineClamp, cx } from '@blog/css';
 import { HiClock, HiHeart, HiEye, HiAnnotation } from 'react-icons/hi';
-import { Post } from '../domains/post';
 import slugify from 'slugify';
+import { Post } from '../domains/post';
 
 // * --------------------------------------------------------------------------- inter
 
@@ -41,7 +39,7 @@ export const PostCard: FC<PostCardProps> = ({ post }) => {
             </div>
 
             <div className={tw`flex items-center text-[#4b5563] mb-1`}>
-              <PostCardIconGroup icon={<HiClock />} text="11 months ago" className={tw`date-icon ${width}`} />
+              <PostCardIconGroup icon={<HiClock />} text="11 months ago" className={tw`w-24`} />
               <PostCardIconGroup icon={<HiEye />} text="890890890890890890" />
               <PostCardIconGroup icon={<HiAnnotation />} text="111" />
               <PostCardIconGroup icon={<HiHeart />} text="890890890890890890" />
@@ -67,7 +65,5 @@ const PostCardIconGroup: FC<{ icon: ReactNode; text: string; className?: string 
 // * --------------------------------------------------------------------------- style
 
 const width = css`
-  &.date-icon {
-    width: 12rem;
-  }
+  min-width: 6rem;
 `;

@@ -45,11 +45,10 @@ importers:
 
   apps/web:
     specifiers:
+      '@blog/css': workspace:*
       '@blog/notion-to-markdown': workspace:*
       '@blog/tsconfig': workspace:*
       '@notionhq/client': ^1.0.4
-      '@twind/line-clamp': ^0.1.1
-      '@twind/next': ^1.0.9
       '@types/node': ^17.0.12
       '@types/react': 18.0.1
       '@types/react-dom': ^17.0.11
@@ -67,13 +66,11 @@ importers:
       react-icons: ^4.4.0
       react-markdown: ^8.0.3
       slugify: ^1.6.5
-      twind: ^0.16.17
       typescript: 4.7.4
     dependencies:
+      '@blog/css': link:../../packages/css
       '@blog/notion-to-markdown': link:../../packages/notion-to-md
       '@notionhq/client': 1.0.4
-      '@twind/line-clamp': 0.1.1_ec74xkl7ldklxgjcg776zfoxcm
-      '@twind/next': 1.0.9_ogjloond7brwepgrh4gwcirnle
       framer-motion: 7.0.0_sgv4m26tnl4echlq645clg5jc4
       jotai: 1.7.8_react@18.2.0
       next: 12.0.8_sgv4m26tnl4echlq645clg5jc4
@@ -85,7 +82,6 @@ importers:
       react-dom: 17.0.2_react@18.2.0
       react-icons: 4.4.0_react@18.2.0
       react-markdown: 8.0.3_q5odbzxwt662spkjfh3s2algau
-      twind: 0.16.17_typescript@4.7.4
     devDependencies:
       '@blog/tsconfig': link:../../tools/config-tsconfig
       '@types/node': 17.0.45
@@ -95,6 +91,33 @@ importers:
       eslint-config-next: 12.2.2_he2ccbldppg44uulnyq4rwocfa
       slugify: 1.6.5
       typescript: 4.7.4
+
+  packages/css:
+    specifiers:
+      '@gengarneko/prettier-config': ^0.1.6
+      '@twind/line-clamp': ^0.1.1
+      '@twind/next': ^1.0.9
+      '@vitest/ui': ^0.20.3
+      c8: ^7.12.0
+      clsx: ^1.2.1
+      prettier: 2.5.1
+      tsup: 6.0.1
+      twind: ^0.16.17
+      typescript: 4.5.4
+      vitest: 0.12.6
+    dependencies:
+      '@twind/line-clamp': 0.1.1_huqs2inb2dsufomgxa4camlzce
+      '@twind/next': 1.0.9_dbpg4lxhcjvtjm2sm2ifvt6fyy
+      clsx: 1.2.1
+      twind: 0.16.17_typescript@4.5.4
+    devDependencies:
+      '@gengarneko/prettier-config': 0.1.6
+      '@vitest/ui': 0.20.3
+      c8: 7.12.0
+      prettier: 2.5.1
+      tsup: 6.0.1_typescript@4.5.4
+      typescript: 4.5.4
+      vitest: 0.12.6_a75h7wshsl437ycz6mdvk7ygqe
 
   packages/markdown-table:
     specifiers:
@@ -757,7 +780,7 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
-  /@twind/line-clamp/0.1.1_ec74xkl7ldklxgjcg776zfoxcm:
+  /@twind/line-clamp/0.1.1_huqs2inb2dsufomgxa4camlzce:
     resolution: {integrity: sha512-OAbGo1traJ5KmTSlIGPAAg8RnQx3XCGriKyPJA2L6yuO0bO1DwDm6oIAAYuLuV792NDyfWeZNcwKUfBXWSnDVQ==}
     engines: {node: '>=10.13'}
     peerDependencies:
@@ -767,11 +790,11 @@ packages:
       typescript:
         optional: true
     dependencies:
-      twind: 0.16.17_typescript@4.7.4
-      typescript: 4.7.4
+      twind: 0.16.17_typescript@4.5.4
+      typescript: 4.5.4
     dev: false
 
-  /@twind/next/1.0.9_ogjloond7brwepgrh4gwcirnle:
+  /@twind/next/1.0.9_dbpg4lxhcjvtjm2sm2ifvt6fyy:
     resolution: {integrity: sha512-WzIavVwk/7vDLwbpvDaTLnjHfC53UT7+rnfZLf8TrEM5uoG4u0u/hhyP20NYLMi6WFVS0BBQtI+xbL/X7DEPUg==}
     engines: {node: '>=10.13'}
     peerDependencies:
@@ -783,10 +806,10 @@ packages:
       typescript:
         optional: true
     dependencies:
-      next: 12.0.8_sgv4m26tnl4echlq645clg5jc4
-      react: 18.2.0
-      twind: 0.16.17_typescript@4.7.4
-      typescript: 4.7.4
+      next: 12.0.8_sfoxds7t5ydpegc3knd667wn6m
+      react: 17.0.2
+      twind: 0.16.17_typescript@4.5.4
+      typescript: 4.5.4
     dev: false
 
   /@types/cacheable-request/6.0.2:
@@ -1369,6 +1392,11 @@ packages:
     resolution: {integrity: sha512-ROoL94jJH2dUVML2Y/5PEDNaSHgeOdSDicUyS7izcF63G6sTc/FTjLub4b8Il9S8S0beOfYt0TaA5qvFK+w0wA==}
     dependencies:
       mimic-response: 1.0.1
+    dev: false
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
     dev: false
 
   /color-convert/1.9.3:
@@ -3411,6 +3439,54 @@ packages:
       - webpack
     dev: false
 
+  /next/12.0.8_sfoxds7t5ydpegc3knd667wn6m:
+    resolution: {integrity: sha512-g5c1Kuh1F8tSXJn2rVvzYBzqe9EXaR6+rY3/KrQ7y0D9FueRLfHI35wM0DRadDcPSc3+vncspfhYH3jnYE/KjA==}
+    engines: {node: '>=12.22.0'}
+    hasBin: true
+    peerDependencies:
+      fibers: '>= 3.1.0'
+      node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0
+      react: ^17.0.2 || ^18.0.0-0
+      react-dom: ^17.0.2 || ^18.0.0-0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      '@next/env': 12.0.8
+      '@next/react-refresh-utils': 12.0.8_react-refresh@0.8.3
+      caniuse-lite: 1.0.30001367
+      jest-worker: 27.0.0-next.5
+      node-fetch: 2.6.1
+      postcss: 8.2.15
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-is: 17.0.2
+      react-refresh: 0.8.3
+      stream-browserify: 3.0.0
+      styled-jsx: 5.0.0-beta.6_react@17.0.2
+      use-subscription: 1.5.1_react@17.0.2
+    optionalDependencies:
+      '@next/swc-android-arm64': 12.0.8
+      '@next/swc-darwin-arm64': 12.0.8
+      '@next/swc-darwin-x64': 12.0.8
+      '@next/swc-linux-arm-gnueabihf': 12.0.8
+      '@next/swc-linux-arm64-gnu': 12.0.8
+      '@next/swc-linux-arm64-musl': 12.0.8
+      '@next/swc-linux-x64-gnu': 12.0.8
+      '@next/swc-linux-x64-musl': 12.0.8
+      '@next/swc-win32-arm64-msvc': 12.0.8
+      '@next/swc-win32-ia32-msvc': 12.0.8
+      '@next/swc-win32-x64-msvc': 12.0.8
+    transitivePeerDependencies:
+      - '@babel/core'
+      - webpack
+    dev: false
+
   /next/12.0.8_sgv4m26tnl4echlq645clg5jc4:
     resolution: {integrity: sha512-g5c1Kuh1F8tSXJn2rVvzYBzqe9EXaR6+rY3/KrQ7y0D9FueRLfHI35wM0DRadDcPSc3+vncspfhYH3jnYE/KjA==}
     engines: {node: '>=12.22.0'}
@@ -4236,6 +4312,27 @@ packages:
       stylis-rule-sheet: 0.0.10_stylis@3.5.4
     dev: false
 
+  /styled-jsx/5.0.0-beta.6_react@17.0.2:
+    resolution: {integrity: sha512-b1cM7Xyp2r1lsNpvoZ6wmTI8qxD0557vH2feHakNU8LMkzfJDgTQMul6O7sSYY0GxQ73pKEN69hCDp71w6Q0nA==}
+    engines: {node: '>= 12.0.0'}
+    peerDependencies:
+      '@babel/core': '*'
+      react: '>= 16.8.0 || 17.x.x || 18.x.x'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+    dependencies:
+      '@babel/plugin-syntax-jsx': 7.14.5
+      '@babel/types': 7.15.0
+      convert-source-map: 1.7.0
+      loader-utils: 1.2.3
+      react: 17.0.2
+      source-map: 0.7.3
+      string-hash: 1.1.3
+      stylis: 3.5.4
+      stylis-rule-sheet: 0.0.10_stylis@3.5.4
+    dev: false
+
   /styled-jsx/5.0.0-beta.6_react@18.2.0:
     resolution: {integrity: sha512-b1cM7Xyp2r1lsNpvoZ6wmTI8qxD0557vH2feHakNU8LMkzfJDgTQMul6O7sSYY0GxQ73pKEN69hCDp71w6Q0nA==}
     engines: {node: '>= 12.0.0'}
@@ -4588,7 +4685,7 @@ packages:
       turbo-windows-arm64: 1.4.3
     dev: true
 
-  /twind/0.16.17_typescript@4.7.4:
+  /twind/0.16.17_typescript@4.5.4:
     resolution: {integrity: sha512-dBKm8+ncJcIALiqBRLxA/krFEwUSjnzR+N73eKgqPtVPJqfLpkajWwKWL5xEpEQ5ypS3ffa0jJjH3/eIeuA3pw==}
     engines: {node: '>=10.13'}
     peerDependencies:
@@ -4600,7 +4697,7 @@ packages:
       csstype: 3.1.0
       htmlparser2: 6.1.0
       style-vendorizer: 2.2.3
-      typescript: 4.7.4
+      typescript: 4.5.4
     dev: false
 
   /type-check/0.4.0:
@@ -4622,7 +4719,6 @@ packages:
     resolution: {integrity: sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /typescript/4.7.4:
     resolution: {integrity: sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==}

@@ -1,5 +1,5 @@
-import { Configuration } from 'twind';
-import { css } from 'twind/css';
+import { css } from '@blog/css';
+import type { Configuration } from '@blog/css';
 
 // * --------------------------------------------------------------------------- config
 

@@ -1,4 +1,4 @@
-import { tw } from 'twind';
+import { tw } from '@blog/css';
 
 export default function Home() {
   return (
