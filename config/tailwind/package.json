@@ -1,5 +1,5 @@
 {
-  "name": "@una/tailwind",
+  "name": "@repo/tailwind",
   "version": "0.4.3",
   "private": true,
   "description": "Tailwindcss preset for gengrneko workspace",
@@ -11,7 +11,7 @@
   },
   "scripts": {
     "clean": "bun run rm -rf *.tsbuildinfo",
-    "lint": "eslint .  --max-warnings 0",
+    "lint": "oxlint .  --max-warnings 0",
     "typecheck": "tsc"
   },
   "dependencies": {
@@ -26,7 +26,7 @@
     "windy-radix-typography": "1.0.0-beta.0"
   },
   "devDependencies": {
-    "@una/eslint": "workspace:^",
-    "@una/tsconfig": "workspace:^"
+    "@repo/eslint": "workspace:^",
+    "@repo/tsconfig": "workspace:^"
   }
 }

@@ -1,5 +1,5 @@
 import { configs, defineConfig } from '@repo/eslint'
 
 export default defineConfig({
-  extends: [...configs.base],
+  extends: [...configs.base, ...configs.next],
 })

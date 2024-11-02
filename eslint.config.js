@@ -1,9 +1,6 @@
-import { configs, defineConfig } from '@una/eslint'
+import { configs, defineConfig } from '@repo/eslint'
 
-export default defineConfig(
-  {
-    ignores: ['apps', 'packages'],
-  },
-
-  ...configs.base,
-)
+export default defineConfig({
+  ignores: ['apps', 'packages', '**/dist/**'],
+  extends: [...configs.base],
+})
