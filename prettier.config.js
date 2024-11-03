@@ -1,6 +1,6 @@
 /** @type {import('@ianvs/prettier-plugin-sort-imports').PrettierConfig} */
 const config = {
-  semi: false,
+  semi: true,
   singleQuote: true,
   trailingComma: 'all',
   arrowParens: 'always',
@@ -41,6 +41,6 @@ const config = {
     '.css$',
   ],
   importOrderTypeScriptVersion: '5.4.5',
-}
+};
 
-export default config
+export default config;
