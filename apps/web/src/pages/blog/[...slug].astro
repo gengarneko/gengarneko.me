@@ -1,12 +1,15 @@
 ---
-import Breadcrumbs from '@/components/Breadcrumbs.astro';
-import Link from '@/components/Link.astro';
-import PostNavigation from '@/components/PostNavigation.astro';
-import TableOfContents from '@/components/TableOfContents.astro';
+import Link /** -------------- **/ from '@/components/Link.astro';
+import Breadcrumbs /** ------- **/ from '@/components/post-breadcrumbs.astro';
+import PostNavigation /** ---- **/ from '@/components/post-navigation.astro';
+import PostSidebar /** ------- **/ from '@/components/post-sidebar.astro';
+import PostTOC /** ----------- **/ from '@/components/post-toc.astro';
+
+import Layout from '@/layouts/Layout.astro';
+
 import { badgeVariants } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import Layout from '@/layouts/Layout.astro';
 import { formatDate, parseAuthors, readingTime } from '@/lib/utils';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
@@ -61,6 +64,7 @@ const authors = await parseAuthors(post.data.authors ?? []);
   <section
     class="grid grid-cols-[minmax(0px,1fr)_min(768px,100%)_minmax(0px,1fr)] gap-y-6 *:px-4"
   >
+    <!-- Breadcrumbs -->
     <Breadcrumbs
       items={[
         { href: '/blog', label: 'Blog', icon: 'lucide:archive' },
@@ -68,6 +72,8 @@ const authors = await parseAuthors(post.data.authors ?? []);
       ]}
       class="col-start-2"
     />
+
+    <!-- Banner Image -->
     <div class="col-span-full mx-auto w-full max-w-[1000px]">
       {
         post.data.image && (
@@ -81,6 +87,8 @@ const authors = await parseAuthors(post.data.authors ?? []);
         )
       }
     </div>
+
+    <!-- Post Title -->
     <section class="col-start-2 flex flex-col gap-y-6 text-center">
       <div class="flex flex-col gap-y-4">
         <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -151,14 +159,20 @@ const authors = await parseAuthors(post.data.authors ?? []);
       <PostNavigation prevPost={prevPost} nextPost={nextPost} />
     </section>
 
-    {headings.length > 0 && <TableOfContents headings={headings} />}
+    <!-- Nav Links -->
+    <PostSidebar />
 
+    <!-- Post Content -->
     <article
       class="prose prose-sm prose-neutral col-start-2 max-w-none dark:prose-invert"
     >
       <Content />
     </article>
 
+    <!-- Table of Contents -->
+    {headings.length > 0 && <PostTOC headings={headings} />}
+
+    <!-- Navigation -->
     <PostNavigation prevPost={prevPost} nextPost={nextPost} />
   </section>
 

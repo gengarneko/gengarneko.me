@@ -10,3 +10,6 @@ drizzle/
 packages/ui/src/components/form/form.mdx
 packages/ui/src/components/toast/toast.mdx
 packages/ui/src/components/carousel/carousel.mdx
+
+**/*.webp
+**/public/static/**

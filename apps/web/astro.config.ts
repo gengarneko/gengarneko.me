@@ -23,7 +23,7 @@ import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://enscribe-dev-astro.vercel.app',
+  site: 'https://gengarneko.vercel.app',
   integrations: [
     tailwind({
       applyBaseStyles: false,

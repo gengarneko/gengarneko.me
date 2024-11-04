@@ -20,15 +20,15 @@ export const NAV_LINKS: Link[] = [
 
 export const SOCIAL_LINKS: Link[] = [
   { href: 'https://github.com/gengarneko', label: 'GitHub' },
-  { href: 'https://twitter.com/gengarneko', label: 'Twitter' },
+  { href: 'https://twitter.com/gengar_neko_', label: 'Twitter' },
   { href: 'gengarneko@gmail.com', label: 'Email' },
   { href: '/rss.xml', label: 'RSS' },
 ];
 
 export const SOCIALS: Socials = [
   { NAME: 'GitHub', HREF: 'https://github.com/gengarneko' },
-  { NAME: 'Twitter', HREF: 'https://twitter.com/gengarneko' },
-  { NAME: 'Email', HREF: 'gengarneko@gmail.com' },
+  { NAME: 'Twitter', HREF: 'https://twitter.com/gengar_neko_' },
+  // { NAME: 'Email', HREF: 'gengarneko@gmail.com' },
   { NAME: 'RSS', HREF: '/rss.xml' },
 ];
 

@@ -2,7 +2,6 @@ import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import { fixupConfigRules } from '@eslint/compat';
 import js from '@eslint/js';
 import prettierConfig from 'eslint-config-prettier';
-import jsdoc from 'eslint-plugin-jsdoc';
 import * as regexpPlugin from 'eslint-plugin-regexp';
 import pluginSecurity from 'eslint-plugin-security';
 import turboPlugin from 'eslint-plugin-turbo';
@@ -38,10 +37,10 @@ export const base = defineConfig(
   prettierConfig,
 
   // JSDoc plugin only for TypeScript files
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [jsdoc.configs['flat/recommended-typescript-error']],
-  },
+  // {
+  //   files: ['**/*.{ts,tsx}'],
+  //   extends: [jsdoc.configs['flat/recommended-typescript-error']],
+  // },
 
   {
     files: ['**/*.cjs'],
