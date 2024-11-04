@@ -1,23 +1,23 @@
 ---
-import { HOME, SITE, SOCIALS } from '@consts'
-import Layout from '@layouts/Layout.astro'
+import { HOME, SITE, SOCIALS } from '@consts';
+import Layout from '@layouts/Layout.astro';
 
-import ArrowCard from '@components/ArrowCard.astro'
-import Container from '@components/Container.astro'
-import Link from '@components/Link.astro'
+import ArrowCard from '@components/ArrowCard.astro';
+import Container from '@components/Container.astro';
+import Link from '@components/Link.astro';
 
-import type { Blog, Project } from '@types'
-import { getCollection } from 'astro:content'
+import type { Blog, Project } from '@types';
+import { getCollection } from 'astro:content';
 
 const blogList: Blog[] = ((await getCollection('blog')) as Blog[])
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE)
+  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 
 const projectList: Project[] = ((await getCollection('projects')) as Project[])
   .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE)
+  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
 ---
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>

@@ -1,5 +1,8 @@
-import { configs, defineConfig } from '@repo/eslint'
+import { configs, defineConfig } from '@repo/eslint';
 
 export default defineConfig({
   extends: [...configs.base, ...configs.react, ...configs.playwright],
-})
+  rules: {
+    'no-bare-urls': 'off',
+  },
+});

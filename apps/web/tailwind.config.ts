@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss'
-import defaultTheme from 'tailwindcss/defaultTheme'
+import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   darkMode: ['selector'],
@@ -48,11 +48,11 @@ const config: Config = {
     function ({
       addVariant,
     }: {
-      addVariant: (variant: string, selector: string) => void
+      addVariant: (variant: string, selector: string) => void;
     }) {
-      addVariant('group-has-hover', ':merge(.group):has(.has-overlay:hover) &')
+      addVariant('group-has-hover', ':merge(.group):has(.has-overlay:hover) &');
     },
   ],
-}
+};
 
-export default config
+export default config;

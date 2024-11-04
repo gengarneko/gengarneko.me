@@ -1,25 +1,25 @@
-import { rehypeHeadingIds } from '@astrojs/markdown-remark'
-import mdx from '@astrojs/mdx'
-import react from '@astrojs/react'
-import sitemap from '@astrojs/sitemap'
-import tailwind from '@astrojs/tailwind'
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
 import {
   transformerMetaHighlight,
   transformerNotationDiff,
   transformerRenderWhitespace,
-} from '@shikijs/transformers'
-import { defineConfig } from 'astro/config'
-import rehypeKatex from 'rehype-katex'
-import rehypeExternalLinks from 'rehype-external-links'
-import rehypePrettyCode from 'rehype-pretty-code'
-import remarkEmoji from 'remark-emoji'
-import remarkMath from 'remark-math'
-import remarkToc from 'remark-toc'
-import sectionize from '@hbsnow/rehype-sectionize'
-import { transformerNotationSkip } from './src/lib/transformerNotationSkip'
-import { transformerDiffHighlight } from './src/lib/transformerDiffHighlight'
+} from '@shikijs/transformers';
+import { defineConfig } from 'astro/config';
+import rehypeKatex from 'rehype-katex';
+import rehypeExternalLinks from 'rehype-external-links';
+import rehypePrettyCode from 'rehype-pretty-code';
+import remarkEmoji from 'remark-emoji';
+import remarkMath from 'remark-math';
+import remarkToc from 'remark-toc';
+import sectionize from '@hbsnow/rehype-sectionize';
+import { transformerNotationSkip } from './src/lib/transformerNotationSkip';
+import { transformerDiffHighlight } from './src/lib/transformerDiffHighlight';
 
-import icon from 'astro-icon'
+import icon from 'astro-icon';
 
 // https://astro.build/config
 export default defineConfig({
@@ -81,4 +81,4 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
-})
+});

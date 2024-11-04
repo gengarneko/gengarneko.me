@@ -1,15 +1,15 @@
-import type { ShikiTransformer } from 'shiki'
-import { createCommentNotationTransformer } from '@shikijs/transformers'
+import type { ShikiTransformer } from 'shiki';
+import { createCommentNotationTransformer } from '@shikijs/transformers';
 
 export interface TransformerNotationSkipOptions {
   /**
    * Class for skipped lines
    */
-  classActiveSkip?: string
+  classActiveSkip?: string;
   /**
    * Class added to the root element when the code has skipped lines
    */
-  classActivePre?: string
+  classActivePre?: string;
 }
 
 /**
@@ -20,7 +20,7 @@ export interface TransformerNotationSkipOptions {
 export function transformerNotationSkip(
   options: TransformerNotationSkipOptions = {},
 ): ShikiTransformer {
-  const { classActiveSkip = 'skip', classActivePre = undefined } = options
+  const { classActiveSkip = 'skip', classActivePre = undefined } = options;
 
   return createCommentNotationTransformer(
     'skip-lines',
@@ -28,14 +28,14 @@ export function transformerNotationSkip(
     /^\s*(?:\/\/|\/\*|<!--|#)\s+\[!code skip:(\d+):(\d+)\]\s*(?:\*\/|-->)?/,
     function ([_, start, end], _line) {
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      _line.children = [{ type: 'text', value: `${start}-${end}` }]
+      _line.children = [{ type: 'text', value: `${start}-${end}` }];
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      _line.properties = { style: `counter-set:line ${end}` }
+      _line.properties = { style: `counter-set:line ${end}` };
 
-      if (classActiveSkip) this.addClassToHast(_line, classActiveSkip)
-      if (classActivePre) this.addClassToHast(this.pre, classActivePre)
-      return false
+      if (classActiveSkip) this.addClassToHast(_line, classActiveSkip);
+      if (classActivePre) this.addClassToHast(this.pre, classActivePre);
+      return false;
     },
     false, // remove empty lines
-  )
+  );
 }

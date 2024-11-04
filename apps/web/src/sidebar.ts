@@ -1,7 +1,7 @@
 export interface SidebarItem {
-  text: string
-  link?: string
-  items?: SidebarItem[]
+  text: string;
+  link?: string;
+  items?: SidebarItem[];
 }
 
 export const sidebar: Record<string, SidebarItem[]> = {
@@ -21,4 +21,4 @@ export const sidebar: Record<string, SidebarItem[]> = {
       ],
     },
   ],
-}
+};

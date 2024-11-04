@@ -1,83 +1,201 @@
 ---
-import BackToPrevious from '@components/BackToPrevious.astro'
-import Container from '@components/Container.astro'
-import FormattedDate from '@components/FormattedDate.astro'
-import Giscus from '@components/Giscus.astro'
-import PostNavigation from '@components/PostNavigation.astro'
-import TableOfContents from '@components/TableOfContents.astro'
-import Layout from '@layouts/Layout.astro'
-import { readingTime } from '@lib/utils'
-import { type CollectionEntry, getCollection } from 'astro:content'
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Link from '@/components/Link.astro';
+import PostNavigation from '@/components/PostNavigation.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
+import { badgeVariants } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import Layout from '@/layouts/Layout.astro';
+import { formatDate, parseAuthors, readingTime } from '@/lib/utils';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import { type CollectionEntry, getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = ((await getCollection('blog')) as CollectionEntry<'blog'>[])
+  const posts = (await getCollection('blog'))
     .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: post,
-  }))
+  }));
 }
+type Props = CollectionEntry<'blog'>;
 
-const posts = ((await getCollection('blog')) as CollectionEntry<'blog'>[])
+const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-function getNextPost() {
-  let postIndex
-  for (const post of posts) {
-    if (post.slug === Astro.params.slug) {
-      postIndex = posts.indexOf(post)
-      return posts[postIndex + 1]
-    }
-  }
+function getPostIndex(slug: string): number {
+  return posts.findIndex((post) => post.slug === slug);
 }
 
-function getPrevPost() {
-  let postIndex
-  for (const post of posts) {
-    if (post.slug === Astro.params.slug) {
-      postIndex = posts.indexOf(post)
-      return posts[postIndex - 1]
-    }
-  }
+function getPrevPost(slug: string): Props | null {
+  const postIndex = getPostIndex(slug);
+  return postIndex !== -1 && postIndex < posts.length - 1
+    ? (posts[postIndex + 1] as Props)
+    : null;
 }
 
-const nextPost = getNextPost()
-const prevPost = getPrevPost()
+function getNextPost(slug: string): Props | null {
+  const postIndex = getPostIndex(slug);
+  return postIndex > 0 ? (posts[postIndex - 1] as Props) : null;
+}
 
-const post = Astro.props
-const { Content, headings } = await post['render']()
+const currentPostSlug = Astro.params.slug;
+const nextPost = getNextPost(currentPostSlug);
+const prevPost = getPrevPost(currentPostSlug);
+
+const post = Astro.props;
+const { Content, headings } = await post.render();
+
+const authors = await parseAuthors(post.data.authors ?? []);
 ---
 
-<Layout title={post['data'].title} description={post['data'].description}>
-  <Container>
-    <div class="animate">
-      <BackToPrevious href="/blog">Back to blog</BackToPrevious>
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image?.src ?? '/static/1200x630.png'}
+>
+  <section
+    class="grid grid-cols-[minmax(0px,1fr)_min(768px,100%)_minmax(0px,1fr)] gap-y-6 *:px-4"
+  >
+    <Breadcrumbs
+      items={[
+        { href: '/blog', label: 'Blog', icon: 'lucide:archive' },
+        { label: post.data.title, icon: 'lucide:file-text' },
+      ]}
+      class="col-start-2"
+    />
+    <div class="col-span-full mx-auto w-full max-w-[1000px]">
+      {
+        post.data.image && (
+          <Image
+            src={post.data.image}
+            alt={post.data.title}
+            width={1200}
+            height={630}
+            class="rounded-xl object-cover"
+          />
+        )
+      }
     </div>
-    <div class="my-10 space-y-1">
-      <div class="animate flex items-center gap-1.5">
-        <div class="font-base text-sm">
-          <FormattedDate date={post['data'].date} />
+    <section class="col-start-2 flex flex-col gap-y-6 text-center">
+      <div class="flex flex-col gap-y-4">
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+          {post.data.title}
+        </h1>
+
+        <div
+          class="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground"
+        >
+          {
+            authors.length > 0 && (
+              <>
+                <div class="flex items-center gap-x-2">
+                  {authors.map((author) => (
+                    <div class="flex items-center gap-x-1.5">
+                      <Image
+                        src={author.avatar}
+                        alt={author.name}
+                        width={24}
+                        height={24}
+                        class="rounded-full"
+                      />
+                      {author.isRegistered ? (
+                        <Link
+                          href={`/authors/${author.slug}`}
+                          underline
+                          class="text-foreground"
+                        >
+                          <span>{author.name}</span>
+                        </Link>
+                      ) : (
+                        <span>{author.name}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <Separator orientation="vertical" className="h-4" />
+              </>
+            )
+          }
+          <div class="flex items-center gap-2">
+            <span>{formatDate(post.data.date)}</span>
+            <Separator orientation="vertical" className="h-4" />
+            <span>{readingTime(post.body)}</span>
+          </div>
         </div>
-        &bull;
-        <div class="font-base text-sm">
-          {readingTime(post['body'])}
+        <div class="flex flex-wrap justify-center gap-2">
+          {
+            post.data.tags && post.data.tags.length > 0 ? (
+              post.data.tags.map((tag) => (
+                <a
+                  href={`/tags/${tag}`}
+                  class={badgeVariants({ variant: 'secondary' })}
+                >
+                  <Icon name="lucide:hash" class="size-3 -translate-x-0.5" />
+                  {tag}
+                </a>
+              ))
+            ) : (
+              <span class="text-sm text-muted-foreground">
+                No tags available
+              </span>
+            )
+          }
         </div>
       </div>
-      <h1 class="animate text-3xl font-semibold text-black dark:text-white">
-        {post['data'].title}
-      </h1>
-    </div>
+
+      <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+    </section>
+
     {headings.length > 0 && <TableOfContents headings={headings} />}
-    <article class="animate">
+
+    <article
+      class="prose prose-sm prose-neutral col-start-2 max-w-none dark:prose-invert"
+    >
       <Content />
-      <div class="mt-24">
-        <PostNavigation prevPost={prevPost} nextPost={nextPost} />
-      </div>
-      <div class="mt-24">
-        <Giscus />
-      </div>
     </article>
-  </Container>
+
+    <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+  </section>
+
+  <Button
+    variant="outline"
+    size="icon"
+    className="group fixed bottom-8 right-8 z-50 hidden"
+    id="scroll-to-top"
+    title="Scroll to top"
+    aria-label="Scroll to top"
+  >
+    <Icon
+      name="lucide:arrow-up"
+      class="mx-auto size-4 transition-all group-hover:-translate-y-0.5"
+    />
+  </Button>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const scrollToTopButton = document.getElementById('scroll-to-top');
+      const footer = document.querySelector('footer');
+
+      if (scrollToTopButton && footer) {
+        scrollToTopButton.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', () => {
+          const footerRect = footer.getBoundingClientRect();
+          const isFooterVisible = footerRect.top <= window.innerHeight;
+
+          scrollToTopButton.classList.toggle(
+            'hidden',
+            window.scrollY <= 300 || isFooterVisible,
+          );
+        });
+      }
+    });
+  </script>
 </Layout>

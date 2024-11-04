@@ -4,5 +4,6 @@
   "no-inline-html": false,
   "no-space-in-emphasis": false,
   "no-duplicate-heading": false,
+  "no-bare-urls": false,
   "code-block-style": false
 }
