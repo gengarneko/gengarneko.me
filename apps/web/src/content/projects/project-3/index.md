@@ -1,9 +1,11 @@
 ---
-title: 'Astro Micro'
+name: 'Astro Micro'
 description: 'Astro Micro is an accessible and lightweight blog.'
+tags: ['react']
 date: '2024-05-26'
 demoURL: 'https://astro-micro.vercel.app'
 repoURL: 'https://github.com/trevortylerlee/astro-micro'
+link: 'https://github.com/trevortylerlee/astro-micro'
 ---
 
 ![Astro Micro](/astro-micro.jpg)

@@ -5,7 +5,7 @@ import Container from '@components/Container.astro';
 import Link from '@components/Link.astro';
 import TableOfContents from '@components/TableOfContents.astro';
 import Layout from '@layouts/Layout.astro';
-import { readingTime } from '@lib/utils';
+import { formatDate, readingTime } from '@lib/utils';
 import { type CollectionEntry, getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -31,7 +31,7 @@ const { Content, headings } = await project.render();
     <div class="animate my-10 space-y-1">
       <div class="flex items-center gap-1.5">
         <div class="font-base text-sm">
-          <span>{formatDate(post.data.date)}</span>
+          <span>{formatDate(project.data.date)}</span>
           <!-- <FormattedDate date={project.data.date} /> -->
         </div>
         &bull;

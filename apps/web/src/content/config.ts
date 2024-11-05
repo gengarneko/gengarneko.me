@@ -37,11 +37,15 @@ const projects = defineCollection({
       name: z.string(),
       description: z.string(),
       tags: z.array(z.string()),
-      image: image().refine((img) => img.width === 1200 && img.height === 630, {
-        message:
-          'The image must be exactly 1200px × 630px for Open Graph requirements.',
-      }),
+      image: image()
+        .refine((img) => img.width === 1200 && img.height === 630, {
+          message:
+            'The image must be exactly 1200px × 630px for Open Graph requirements.',
+        })
+        .optional(),
       link: z.string().url(),
+      date: z.coerce.date(),
+      draft: z.boolean().optional(),
     }),
 });
 

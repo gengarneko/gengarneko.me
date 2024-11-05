@@ -5,7 +5,7 @@ export const SITE: Site = {
   DESCRIPTION: 'A personal website',
   LOGO: 'https://avatars.githubusercontent.com/u/16524264?v=4&size=64',
   EMAIL: 'gengarneko@gmail.com',
-  NUM_POSTS_ON_HOMEPAGE: 2,
+  NUM_POSTS_ON_HOMEPAGE: 4,
   POSTS_PER_PAGE: 4,
   SITE_URL: 'https://gengarneko.me',
 };
@@ -13,9 +13,8 @@ export const SITE: Site = {
 export const NAV_LINKS: Link[] = [
   { href: '/', label: 'home' },
   { href: '/blog', label: 'blog' },
-  // { href: '/authors', label: 'authors' },
-  { href: '/about', label: 'about' },
-  // { href: '/tags', label: 'tags' },
+  { href: '/notes', label: 'tags' },
+  // { href: '/about', label: 'about' },
 ];
 
 export const SOCIAL_LINKS: Link[] = [

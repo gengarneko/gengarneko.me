@@ -7,7 +7,7 @@ import type { CollectionEntry } from 'astro:content';
 import SocialIcons from './SocialIcons.astro';
 
 type Props = {
-  author: CollectionEntry<'authors'>;
+  author: CollectionEntry<'author'>;
   linkDisabled?: boolean;
 };
 const { author, linkDisabled = false } = Astro.props;
@@ -37,7 +37,7 @@ const socialLinks: SocialLink[] = [
 >
   <div class="flex flex-wrap gap-4">
     <Link
-      href={`/authors/${author.slug}`}
+      href={`/author/${author.slug}`}
       class={cn('block', linkDisabled && 'pointer-events-none')}
     >
       <AvatarComponent

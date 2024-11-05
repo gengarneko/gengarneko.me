@@ -56,15 +56,15 @@ const projectList: Project[] = ((await getCollection('projects')) as Project[])
         <section class="animate space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-y-2">
             <h2 class="font-semibold text-black dark:text-white">
-              Latest posts
+              Pinned Projects
             </h2>
-            <Link underline href="/blog"> see more</Link>
+            <Link underline href="/projects">see more</Link>
           </div>
-          <ul class="not-prose flex flex-col gap-4">
+          <ul class="not-prose grid grid-cols-1 gap-4 sm:grid-cols-2">
             {
-              blogList.map((post: Blog) => (
+              projectList.map((project: Project) => (
                 <li>
-                  <ArrowCard entry={post} />
+                  <ArrowCard entry={project} />
                 </li>
               ))
             }
@@ -74,15 +74,15 @@ const projectList: Project[] = ((await getCollection('projects')) as Project[])
         <section class="animate space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-y-2">
             <h2 class="font-semibold text-black dark:text-white">
-              Pinned Projects
+              Pinned posts
             </h2>
-            <Link underline href="/projects">see more</Link>
+            <Link underline href="/blog"> see more</Link>
           </div>
           <ul class="not-prose flex flex-col gap-4">
             {
-              projectList.map((project: Project) => (
+              blogList.map((post: Blog) => (
                 <li>
-                  <ArrowCard entry={project} />
+                  <ArrowCard entry={post} />
                 </li>
               ))
             }

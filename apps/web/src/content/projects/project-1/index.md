@@ -1,9 +1,11 @@
 ---
-title: 'Astro Sphere'
+name: 'Astro Sphere'
 description: 'Portfolio and blog build with astro.'
+tags: ['react']
 date: '03/18/2024'
 demoURL: 'https://astro-sphere-demo.vercel.app'
 repoURL: 'https://github.com/markhorn-dev/astro-sphere'
+link: 'https://github.com/markhorn-dev/astro-sphere'
 ---
 
 ![Astro Sphere](/astro-sphere.jpg)

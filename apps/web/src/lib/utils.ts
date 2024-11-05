@@ -47,7 +47,6 @@ export async function parseAuthors(authors?: string[]) {
   const parseAuthor = async (slug: string) => {
     try {
       const author = await getEntry('authors', slug);
-      console.log('author ---------------------------------', author);
       return {
         slug,
         name: author?.data?.name || slug,
