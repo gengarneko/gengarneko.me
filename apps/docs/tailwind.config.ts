@@ -4,8 +4,9 @@ import { tailwindPreset } from '@repo/tailwind';
 
 const config: Config = {
   content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx,astro}',
-    '../../packages/ui/dist/**/*.js',
+    './docs/**/*.{js,ts,jsx,tsx,mdx,astro}',
+    './ui/**/*.{js,ts,jsx,tsx,mdx,astro}',
+    './theme/**/*.{js,ts,jsx,tsx,mdx,astro}',
   ],
   darkMode: 'class',
   presets: [tailwindPreset],

@@ -1,3 +1,27 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+:root {
+  --rp-radius: 0.5rem;
+  --rp-radius-small: 0.5rem;
+  --rp-radius-large: 1.5rem;
+
+  --rp-nav-width: 1440px;
+}
+
+body {
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .my-nav {
+    width: 100%;
+
+    .rspress-nav {
+      width: var(--rp-nav-width);
+    }
+  }
+}
