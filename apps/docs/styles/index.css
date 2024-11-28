@@ -15,13 +15,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-  }
 
-  .my-nav {
-    width: 100%;
-
-    .rspress-nav {
-      width: var(--rp-nav-width);
+    .rspress-sidebar {
+      height: 100%;
     }
   }
 }
