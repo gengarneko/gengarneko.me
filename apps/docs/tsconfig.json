@@ -1,18 +1,11 @@
 {
-  "extends": "@repo/typescript-config/nextjs.json",
+  "extends": "@repo/tsconfig/react.json",
   "compilerOptions": {
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    "useDefineForClassFields": true,
+    "allowImportingTsExtensions": true
   },
-  "include": [
-    "next-env.d.ts",
-    "next.config.mjs",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["docs", "theme", "rspress.config.ts"],
+  "mdx": {
+    "checkMdx": true
+  }
 }

@@ -1,5 +1,6 @@
 import { configs, defineConfig } from '@repo/eslint';
 
 export default defineConfig({
-  extends: [...configs.base, ...configs.next],
+  extends: [...configs.base],
+  ignorePatterns: ['node_modules', 'dist', 'doc_build'],
 });

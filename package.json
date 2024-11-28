@@ -11,6 +11,7 @@
     "config/*"
   ],
   "scripts": {
+    "build": "turbo run build",
     "commit": "git-cz",
     "format": "bun format:write",
     "format:check": "prettier \"**/*\" --ignore-unknown --list-different",
@@ -28,7 +29,7 @@
       "prettier --list-different"
     ],
     "**/*.{ts,tsx,js,jsx,cjs,mjs}": [
-      "eslint"
+      "oxlint"
     ],
     "**/*.{md,mdx}": [
       "markdownlint"
@@ -48,12 +49,11 @@
     "@types/node": "^22.5.2",
     "@types/yargs": "^17.0.33",
     "commitizen": "^4.3.0",
-    "eslint": "^9.9.1",
     "husky": "^9.1.5",
     "lint-staged": "^15.2.10",
     "markdownlint": "^0.35.0",
     "markdownlint-cli": "^0.41.0",
-    "oxlint": "^0.10.3",
+    "oxlint": "^0.13.2",
     "pkg-types": "^1.2.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
