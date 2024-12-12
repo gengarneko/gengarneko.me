@@ -1,0 +1,23 @@
+[
+  {
+    "type": "file",
+    "name": "introduction",
+    "label": "介绍"
+  },
+  {
+    "type": "file",
+    "name": "data-formats",
+    "label": "数据格式"
+  },
+  {
+    "type": "file",
+    "name": "level-of-details",
+    "label": "层次细节 (LOD)"
+  },
+  {
+    "type": "file",
+    "name": "octree-optimization",
+    "label": "八叉树优化"
+  },
+  "tools"
+]
