@@ -8,5 +8,10 @@
     "text": "文章",
     "link": "/tech/",
     "activeMatch": "/tech/"
+  },
+  {
+    "text": "周刊",
+    "link": "/weekly/",
+    "activeMatch": "/weekly/"
   }
 ]

@@ -13,6 +13,7 @@
   "scripts": {
     "build": "turbo run build",
     "commit": "git-cz",
+    "dev": "turbo run dev --filter=docs",
     "format": "bun format:write",
     "format:check": "prettier \"**/*\" --ignore-unknown --list-different",
     "format:write": "prettier \"**/*\" --ignore-unknown --list-different --write",

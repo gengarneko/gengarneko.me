@@ -2,11 +2,6 @@
   "index",
   "introduction",
   {
-    "type": "file",
-    "name": "job-description",
-    "label": "求职"
-  },
-  {
     "type": "dir",
     "name": "autonomous-driving",
     "label": "自动驾驶"
